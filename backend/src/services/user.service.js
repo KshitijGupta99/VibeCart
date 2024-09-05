@@ -8,3 +8,5 @@ class UserService {
   async getUserById(id) {
   }
 }
+
+module.exports = UserService;

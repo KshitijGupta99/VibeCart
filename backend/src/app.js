@@ -66,10 +66,10 @@ app.use(
 );
 
 // routes imports
-// const v1Routes = require('./routes/v1');
+const v1Routes = require('./routes');
 
 // routes
-// app.use('/v1', v1Routes);
+app.use('/v1', v1Routes);
 
 // default route
 app.get('/', (req, res) => {
