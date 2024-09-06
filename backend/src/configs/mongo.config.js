@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const ENV_CONFIG = require('./env.config.js');
+const ENV_CONFIG = require("./env.config.js");
 
-const { Logger } = require('../utils');
+const { Logger } = require("../utils");
 
 class MongoConfig {
   constructor() {

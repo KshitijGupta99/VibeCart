@@ -1,4 +1,4 @@
-const { UserService } = require("../services")
+const { UserService } = require("../services");
 
 class UserController {
   constructor() {
@@ -7,9 +7,9 @@ class UserController {
 
   async registerUser(req, res) {
     try {
-      return res.send("hii")
+      return res.send("hii");
     } catch (error) {
-      return res.send(error.message)
+      return res.send(error.message);
     }
   }
 }

@@ -1,10 +1,10 @@
-const winston = require('winston');
-const winstonDailyRotateFile = require('winston-daily-rotate-file');
+const winston = require("winston");
+const winstonDailyRotateFile = require("winston-daily-rotate-file");
 
-const { Logtail } = require('@logtail/node');
-const { LogtailTransport } = require('@logtail/winston');
+const { Logtail } = require("@logtail/node");
+const { LogtailTransport } = require("@logtail/winston");
 
-const ENV_CONFIGS = require('../configs/env.config');
+const ENV_CONFIGS = require("../configs/env.config");
 
 // const logtail = new Logtail(ENV_CONFIGS.LOG_TAIL_TOKEN);
 
@@ -26,24 +26,24 @@ const commonFormat = combine(
   json(),
   prettyPrint(),
   label({
-    label: 'backend',
+    label: "backend",
   }),
   timestamp({
-    format: 'YYYY-MM-DD HH:mm:ss',
+    format: "YYYY-MM-DD HH:mm:ss",
     utc: true,
-    timezone: 'Europe/London',
+    timezone: "Europe/London",
   }),
   colorize({
     all: true,
     colors: {
-      error: 'red',
-      warn: 'yellow',
-      info: 'green',
-      debug: 'blue',
+      error: "red",
+      warn: "yellow",
+      info: "green",
+      debug: "blue",
     },
   }),
   printf(({ level, message, label, timestamp, meta, stack }) => {
-    const formattedMeta = meta ? ` ${JSON.stringify(meta)}` : '';
+    const formattedMeta = meta ? ` ${JSON.stringify(meta)}` : "";
     const logMessage = `${timestamp} [${label}] ${level}: ${message}${formattedMeta}`;
     if (stack) {
       const stackInfo =
@@ -60,20 +60,20 @@ const commonFileFormat = combine(
   json(),
   prettyPrint(),
   label({
-    label: 'backend',
+    label: "backend",
   }),
   timestamp({
-    format: 'YYYY-MM-DD HH:mm:ss',
+    format: "YYYY-MM-DD HH:mm:ss",
     utc: true,
-    timezone: 'Europe/London',
+    timezone: "Europe/London",
   }),
   colorize({
     all: true,
     colors: {
-      error: 'red',
-      warn: 'yellow',
-      info: 'green',
-      debug: 'blue',
+      error: "red",
+      warn: "yellow",
+      info: "green",
+      debug: "blue",
     },
   }),
 );
@@ -81,7 +81,7 @@ const commonFileFormat = combine(
 class Logger {
   constructor() {
     this.logger = createLogger({
-      level: 'info',
+      level: "info",
       format: commonFormat,
       transports: [
         new transports.Console(),
@@ -98,19 +98,19 @@ class Logger {
   }
 
   error(message, meta) {
-    this.log('error', message, meta);
+    this.log("error", message, meta);
   }
 
   warn(message, meta) {
-    this.log('warn', message, meta);
+    this.log("warn", message, meta);
   }
 
   info(message, meta) {
-    this.log('info', message, meta);
+    this.log("info", message, meta);
   }
 
   debug(message, meta) {
-    this.log('debug', message, meta);
+    this.log("debug", message, meta);
   }
 }
 
