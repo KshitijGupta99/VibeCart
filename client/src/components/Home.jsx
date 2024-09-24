@@ -20,7 +20,7 @@ const Home = () => {
           
 
             <div><button className="pt-0 btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
-              <i className="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">LOGO</i>
+              <i className="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"><img src="client\public\icon.png" alt="logo image" /></i>
             </button></div>
 
 
