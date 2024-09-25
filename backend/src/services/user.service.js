@@ -1,51 +1,57 @@
-const { UserRepository } = require("../repositories")
+const { UserRepository } = require("../repositories");
+const bcrypt = require("bcryptjs");
 
 class UserService {
   constructor() {
     this.userRepository = new UserRepository();
   }
 
-  async registerUser(userData){
+  // Register user method
+  async registerUser(userData) {
     try {
-      //userRep[ository.create 
-      let user = UserRepository.register(data);
+      const user = await this.userRepository.register(userData); // Use instance method
       return user;
-      
     } catch (error) {
-      throw error.message;
+      throw new Error(error.message);
     }
   }
 
-  async getUserById(id) {
-  }
-
-  async matchcreds(user){
+  // Match credentials to check if user exists by email or username
+  async matchcreds(user) {
     try {
-      const userFromDb = await UserRepository.findByEmail(user.email);
-      if(userFromDb){
-        return false;
+      // Check if a user with this email exists
+      let userFromDb = await this.userRepository.findByEmail(user.email);
+      if (userFromDb) {
+        return userFromDb; // Return the user object if found
       }
-      userFromDb = await UserRepository.findByUsername(user.username);
-      if(userFromDb){
-        return false;
-      }
-      
 
-      return userFromDb;
+      // Check if a user with this username exists
+      userFromDb = await this.userRepository.findByUsername(user.username);
+      if (userFromDb) {
+        return userFromDb; // Return the user object if found
+      }
+
+      return null; // Return null if no user is found
     } catch (error) {
-      throw error.message;
+      throw new Error(error.message);
     }
   }
 
-  async hashpassword(password){
-    const salt = await bcrypt.genSaltSync(10);
-    const hashkey = await bcrypt.hashSync(password, salt);
-    return hashkey;
+  // Hash password
+  async hashpassword(password) {
+    try {
+      const salt = await bcrypt.genSalt(10); // Async salt generation
+      const hashkey = await bcrypt.hash(password, salt); // Async password hashing
+      return hashkey;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
-
-
-
+  // Method to get user by ID (placeholder)
+  async getUserById(id) {
+    // Implement logic to get user by ID if needed
+  }
 }
 
 module.exports = UserService;
