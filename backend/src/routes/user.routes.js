@@ -6,7 +6,7 @@ const userController = new UserController();
 
 
 router.post('/register', userController.registerUser)
-router.get('/login', userController.loginUser)
+router.post('/login', userController.loginUser)
 router.get('/getinfo', userController.getUser)
 
 module.exports = router

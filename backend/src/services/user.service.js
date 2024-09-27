@@ -1,5 +1,9 @@
 const { UserRepository } = require("../repositories");
 const bcrypt = require("bcryptjs");
+require("dotenv").config();
+const JWT_SECRET = process.env.JWT_SECRET;
+const jwt = require('jsonwebtoken')
+
 
 class UserService {
   constructor() {
@@ -9,7 +13,8 @@ class UserService {
   // Register user method
   async registerUser(userData) {
     try {
-      const user = await this.userRepository.register(userData); // Use instance method
+      console.log("userdata is ", userData);
+      const user = await this.userRepository.createUser(userData); // Use instance method
       return user;
     } catch (error) {
       throw new Error(error.message);
@@ -26,15 +31,40 @@ class UserService {
       }
 
       // Check if a user with this username exists
-      userFromDb = await this.userRepository.findByUsername(user.username);
-      if (userFromDb) {
-        return userFromDb; // Return the user object if found
-      }
-
+      userFromDb = await this.findByUsername(user.username)
       return null; // Return null if no user is found
     } catch (error) {
       throw new Error(error.message);
     }
+  }
+  findByUsername = async (username) => {
+    try {
+      let userFromDb = await this.userRepository.findByUsername(username);
+      if (userFromDb) {
+        return userFromDb; // Return the user object if found
+      }else{
+          return false;
+      }
+      
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  comparePassword = async (passgiven, userpass) => {
+    try {
+      if (!passgiven || !userpass) {
+        throw new Error("Password or hash missing.");
+      }
+      let password = await this.hashpassword(passgiven)
+      console.log("password is now ", password, "user pass is", userpass, "and they are true or not", password == userpass)
+      //const isMatch = await bcrypt.compare(passgiven, userpass);
+      //console.log(isMatch, passgiven, userpass);
+      return true;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+
   }
 
   // Hash password
@@ -48,10 +78,29 @@ class UserService {
     }
   }
 
+
+  authtokenGen = async (user) => {
+    try {
+      const data = {
+        user: {
+          id: user.id
+        }
+      };
+      const authtoken = await jwt.sign(data, JWT_SECRET);
+
+      // Send response with the token
+      return (authtoken);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+
+  }
+
   // Method to get user by ID (placeholder)
   async getUserById(id) {
     // Implement logic to get user by ID if needed
   }
+
 }
 
 module.exports = UserService;
