@@ -29,6 +29,15 @@ class UserRepository {
     }
   }
 
+  findById = async (id)=>{
+    try {
+      let user = await User.findById(id);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 
 }
 

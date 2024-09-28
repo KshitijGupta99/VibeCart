@@ -98,6 +98,12 @@ class UserService {
 
   // Method to get user by ID (placeholder)
   async getUserById(id) {
+    try {
+      let user = UserRepository.findById(id);
+      return user;
+    } catch (error) {
+      throw new Error(error.message);
+    }
     // Implement logic to get user by ID if needed
   }
 

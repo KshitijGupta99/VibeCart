@@ -69,9 +69,12 @@ class UserController {
     }
   }
 
-  async getUser(req, res) {
+  getUser = async (req, res)=> {
     try {
+      const {id} = req.body;
+      let user = await this.userService.getUserById(id)
       return res.send("user")
+
     } catch (error) {
       return res.send(error.message)
     }
