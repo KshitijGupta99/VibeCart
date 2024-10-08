@@ -2,34 +2,35 @@ const { Products } = require('../models');
 
 class ProductRepository {
     async getAllProducts() {
-        return await Products.findAll();
+        return await Products.find();
     }
     
     async getProductById(productId) {
-        return await Products.findByPk(productId);
+        console.log(productId);
+        return await Products.find( { product_id: productId } );
     }
     
     async addProduct(productData) {
         return await Products.create(productData);
     }
     async updateProduct(productId, productData) {
-        return await Products.update(productData, { where: { id: productId } });
+        return await Products.update(productData, { product_id: productId } );
     }
 
     async deleteProduct(productId) {
-        return await Products.destroy({ where: { id: productId } });
+        return await Products.deleteOne({ product_id: productId });
     }
     
     async getProductsByCategory(category) {
-        return await Products.findAll({ where: { category } });
+        return await Products.find({ product_id: productId });
     }
     
     async getProductsByRating(rating) {
-        return await Products.findAll({ where: { rating } });
+        return await Products.find({ where: { rating } });
     }
     
     async updateProductRating(productId, ratingData) {
-        const product = await Products.findByPk(productId);
+        const product = await Products.find({ product_id: productId });
         if (!product) {
             throw new Error('Product not found');
         }
@@ -38,16 +39,22 @@ class ProductRepository {
     }
 
     async getProductsByPriceRange(minPrice, maxPrice) {
-        return await Products.findAll({ where: { price: { [Op.between]: [minPrice, maxPrice] } } });
+        return await Products.find( { price: { [Op.between]: [minPrice, maxPrice] } });
     }
 
     async getProductsWithDiscount() {
-        return await Products.findAll({ where: { discount: { [Op.gt]: 0 } } });
+        return await Products.find({ discount: { [Op.gt]: 0 } });
     }
     
     async searchProducts(searchTerm){
-        return await Products.findAll([where: {desc.includes(searchTerm) || title.includes(searchTerm)}]) // need to be edited
+        return await Products.find({ 
+                [Op.or]: [
+                    { title: { [Op.like]: `%${searchTerm}%` } },
+                    { description: { [Op.like]: `%${searchTerm}%` } }
+                ]
+        });
     }
+    
     
     
 
