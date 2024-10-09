@@ -9,7 +9,7 @@ const ItemContainer = () => {
   useEffect(() => {
     const fetching = async () => {
       try {
-        let response = await fetch(`${url}/product/getitems`, {
+        let response = await fetch(`${url}/product/getAllProducts`, {
           method: "GET",
           headers: {
             "auth-token": localStorage.getItem('token')
@@ -40,7 +40,7 @@ return (
     </div>
     <div className='container row align-items-start' style={{ height: "auto", width: "100vw" }}>
       {(items)?.map((item) => {
-        return <Item key={item.id} data={item} />
+        return <Item key={item._id} data={item} />
       })}
     </div>
 
