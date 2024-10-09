@@ -1,18 +1,41 @@
 const { User } = require('../models');
 
 class UserRepository {
-  constructor() {
-
-  }
   //create user{ User model se create}
-  async registerUser(userData) {
+  async createUser(userData) {
     try {
+      console.log(userData);
       let user = await User.create(userData);
       return user;
     } catch (error) {
       throw error;
     }
+  }
 
+  findByEmail = async (email) => {
+    try {
+      let user = await User.findOne({ email });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+  findByUsername = async (username) => {
+    try {
+      let user = await User.findOne({ username });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  findById = async (id)=>{
+    try {
+      let user = await User.findById(id);
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 
 

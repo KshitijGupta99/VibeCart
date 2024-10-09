@@ -7,55 +7,74 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 
 class UserController {
+
   constructor() {
     this.userService = new UserService();
   }
 
-  async registerUser(req, res) {
+  registerUser = async (req, res) => {
     try {
+      // Check if user already exists
+      if (await this.userService.matchcreds(req.body)) {
+        return res.status(401).json("User with these details already exists");
+      }
 
-      //const [createUserRes, createUserResErr] = this.userService.registerUser
-
-      let user = await User.create({
-        username: req.body.username,
+      // Create the new user object matching your schema
+      let user = {
+        username: req.body.username,  
         password: req.body.password,
         email: req.body.email,
-      });
-      if (UserService.matchcreds(user)) {
-        return res.status(401).json("User with this details already exsist")
-      }
+        address: req.body.address,  // Assuming you also want to accept address
+        contact: req.body.contact,  // Assuming you also want to accept contact
+      };
 
-      const hashkey = UserService.hashpassword(user.password)
-      user.password = hashkey;
-      user = UserService.registerUser(data)
+      // Hash the password before saving the user
+      const hashKey = await this.userService.hashpassword(user.password);
+      user.password = hashKey;
 
-      const data = {
-        user: {
-          id: user.id
-        }
-      }
+      // Save the user to the database using UserService
+      const savedUser = await this.userService.registerUser(user);
 
-      const authtoken = jwt.sign(data, JWT_SECRET);
-      res.json({ authtoken });
+      // Prepare JWT token
+      let token = await this.userService.authtokenGen(savedUser);
+      res.json({ token });
 
     } catch (error) {
-
-      return res.send(error.message , "error in controller")
-
+      console.error(error);
+      return res.status(500).json({ message: "Error in controller", error: error.message });
     }
   }
 
-  async loginUser(req, res) {
+
+
+
+  loginUser = async (req, res) => {
+
     try {
-      return res.send("hello")
+      const { username, password } = req.body;
+
+      let user = await this.userService.findByUsername(username);
+      if (!user) return res.status(401).json({ error: "Invalid credentials" });
+      console.log("user opassword is" , user);
+      if (!user.password) return res.status(400).json({ message: "No password found for this user" });
+
+      let userValid = await this.userService.comparePassword(password, user.password);     //matching password 
+      if (!userValid) return res.status(401).json({ error: "Invalid credentials" });
+
+      let token = await this.userService.authtokenGen(user);
+      res.json({ token });
+
     } catch (error) {
       return res.send(error.message)
     }
   }
 
-  async getUser(req, res) {
+  getUser = async (req, res)=> {
     try {
+      const {id} = req.body;
+      let user = await this.userService.getUserById(id)
       return res.send("user")
+
     } catch (error) {
       return res.send(error.message)
     }
