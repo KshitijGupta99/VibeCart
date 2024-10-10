@@ -7,7 +7,7 @@ class ProductRepository {
     
     async getProductById(productId) {
         console.log(productId);
-        return await Products.find( { product_id: productId } );
+        return await Products.find( { _id: productId } );
     }
     
     async addProduct(productData) {

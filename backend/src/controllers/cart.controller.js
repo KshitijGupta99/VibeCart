@@ -8,12 +8,15 @@ class CartController {
     
     // Add item to cart
     addToCart = async (req, res) => {
+        const userId = req.params.userId;  // Assuming you pass userId in the URL like /cart/:userId/add
+        const productData = req.body;
+
         try {
-            const { productId, quantity } = req.body;
-            const cartItem = await this.cartServices.addtoCart(req.body);
-            res.status(201).json(cartItem);
+            const updatedCart = await this.cartServices.addtoCart(userId, productData);
+            res.status(200).json(updatedCart);
         } catch (error) {
-            console.error(error);
+            console.error("Error adding to cart:", error);
+            res.status(500).json({ error: "Server Error" });
         }
     }
 

@@ -6,7 +6,7 @@ const {CartController} = require('../controllers')
 const cartController = new CartController();
 
 
-router.post('/addProductToCart', cartController.addToCart)
+router.post('/addProductToCart/:userId/add', cartController.addToCart)
 
 router.post('/removeProductFromCart', cartController.removeFromCart)
 

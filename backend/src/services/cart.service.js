@@ -6,8 +6,8 @@ class CartServices{
     }
     
     //to add
-    async addtoCart(data){
-        return await this.cartRepository.addtoCart(data)
+    async addtoCart(userId, productData){
+        return await this.cartRepository.addtoCart(userId, productData);
     }
     
     //to remove
