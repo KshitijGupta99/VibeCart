@@ -1,4 +1,3 @@
-import { get } from 'mongoose';
 import React, { useEffect, useState } from 'react'
 
 const url  =  import.meta.env.VITE_BACKEND_URL;
@@ -16,25 +15,27 @@ const Login = () => {
 
         if (x.type === "password") {
             x.type = "text";
-            eye.src = ".\\public\\eyeopen.png";
+            eye.src = ".\\eyeopen.png";
         } else {
             x.type = "password";
-            eye.src = ".\\public\\eyebrowClose.png";
+            eye.src = ".\\eyebrowClose.png";
         }
     };
     const handleSubmit = async (e)=>{
         e.preventDefault()
         try{
-            let response = await fetch(`${url}/auth/login`,{
+            let response = await fetch(`${url}/user/login`,{
                 method : "POST",
                 headers: {
                     "Content-type" : 'application/json'
                 },
                 body: JSON.stringify({email, password})
             });
+            console.log(response)
             if(response.ok){
                 const authToken = await response.json();
-                localStorage.setItem('token', authToken.authToken);
+                console.log(authToken)
+                localStorage.setItem('token', authToken?.token);
                 seterrorMsg("");
             }
             else if( response.status == 401){

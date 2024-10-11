@@ -11,7 +11,7 @@ const Cart = () => {
     // Define the async fetch function
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/cart/getitems`, {
+        const response = await fetch(`${url}/cart/getcartdetails`, {
           method: "GET",
           headers: {
               "auth-token": localStorage.getItem('token'),
@@ -49,7 +49,7 @@ const Cart = () => {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              {data.map((item)=>{
+              {data?.map((item)=>{
                 return (
                   <CartItem key={item._id} item={item}/>
                 )

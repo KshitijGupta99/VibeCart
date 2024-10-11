@@ -39,7 +39,7 @@ return (
       </ul>
     </div>
     <div className='container row align-items-start' style={{ height: "auto", width: "100vw" }}>
-      {(items)?.map((item) => {
+      {items?.map((item) => {
         return <Item key={item._id} data={item} />
       })}
     </div>

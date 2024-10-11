@@ -13,7 +13,7 @@ const Item = ({ data }) => {
         e.preventDefault();
         try {
             setbuffer(true);
-            let response = await fetch(`${url}/cart/addcart`, {
+            let response = await fetch(`${url}/cart/addProductToCart`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

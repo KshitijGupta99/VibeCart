@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const Signup = () => {
-    const url = import.meta.env.BITE_BACKEND_URL;
+    const url = import.meta.env.VITE_BACKEND_URL;
     const[creds,setCreds] = useState({
         username : "",
         email : "",
@@ -13,7 +13,7 @@ const Signup = () => {
         e.preventDefault();
         try{
 
-            let response = await fetch(`${url}/auth/signup`,{
+            let response = await fetch(`${url}/user/register`,{
                 method : "POST",
                 headers: {
                     "Content-type" : 'application/json'

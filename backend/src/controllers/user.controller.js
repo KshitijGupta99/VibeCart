@@ -14,6 +14,7 @@ class UserController {
 
   registerUser = async (req, res) => {
     try {
+      console.log(req)
       // Check if user already exists
       if (await this.userService.matchcreds(req.body)) {
         return res.status(401).json("User with these details already exists");

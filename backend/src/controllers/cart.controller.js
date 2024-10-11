@@ -32,7 +32,7 @@ class CartController {
     // Get cart items
     getCartItems = async (req, res) => {
         try {
-            const cartItems = await this.cartServices.getAllCartItems(req.params.id);
+            const cartItems = await this.cartServices.getAllCartItems("userid");
             res.status(200).json(cartItems);
         } catch (error) {
             console.error(error);
