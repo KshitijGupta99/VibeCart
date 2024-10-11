@@ -13,7 +13,7 @@ class UserService {
   // Register user method
   async registerUser(userData) {
     try {
-      console.log("userdata is ", userData);
+     
       const user = await this.userRepository.createUser(userData); // Use instance method
       return user;
     } catch (error) {

@@ -22,7 +22,6 @@ const CartItem = (props) => {
            
             const result = await response.json();
             setData(result);
-            console.log(result, "result of product "); // Update state with fetched data
           } catch (error) {
             console.error("Error fetching data:", error);
           }
@@ -30,7 +29,6 @@ const CartItem = (props) => {
     
         // Call the fetch function when the component loads
         fetchData();
-        console.log(data)
       }, []);
     return (
         <div>

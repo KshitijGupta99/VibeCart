@@ -31,15 +31,15 @@ const ItemContainer = () => {
     }, []);
 
     return (
-        <div className='container'>
-            <nav>
-                <ul className='nav'>
+        <div className=' mx-0 py-5 max-vw-100'style={{width:'100vw', backgroundColor:'#c8e5e1'}} >
+            <nav className='my-3' >
+                <ul className='nav d-flex justify-content-around' style = {{width: '100vw', alignItems:'center'}}>
                     {['All', 'Electronics', 'Fashion', 'Kitchen', 'Kids', 'Cosmetics'].map(category => (
-                        <li key={category} className='nav-item ps-4 font-face'>{category}</li>
+                        <li key={category} style={{fontFamily: 'serif'}} className='fs-3 nav-item px-4 font-face bg-warning-subtle'>{category}</li>
                     ))}
                 </ul>
             </nav>
-            <div className='container row align-items-start' style={{ height: "auto", width: "100vw" }}>
+            <div className='ms-4 me-4 row align-items-start d-flex justify-content-between' style={{ height: "auto", width: '97vw' }}>
                 {items?.map(item => (
                     <Item key={item._id} data={item} />
                 ))}

@@ -40,7 +40,7 @@ const Item = ({ data }) => {
     };
 
     return (
-        <div className="card mx-2 my-2 px-0 pb-1 pt-3" style={{ width: "18rem", height: "20rem" }}>
+        <div className="card my-3 px-4 pb-1 pt-3" style={{ width: "18rem", height: "20rem", marginLeft: '1em', marginRight: '1em' }}>
             <img src={data.image} alt={data.description} style={{ width: "100%", height: "125px", objectFit: "contain" }} className="card-img-top" />
             <div className="card-body text-start">
                 <h5 className="card-title" style={{ overflow: "hidden", maxHeight: '7vh' }}>
@@ -55,7 +55,7 @@ const Item = ({ data }) => {
                 </p>
                 {errorMsg && <p className="text-danger">{errorMsg}</p>}
             </div>
-            <div className="position-absolute" style={{ bottom: '1em', left: '1em' }}>
+            <div className="position-absolute" style={{ bottom: '1em', right: '1em' }}>
                 <button type="button" className="btn btn-success" onClick={handleClick} disabled={buffer}>
                     {buffer ? 'Adding...' : 'Add'}
                 </button>

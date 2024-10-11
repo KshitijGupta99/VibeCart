@@ -60,7 +60,6 @@ router.post("/addcart", fetchData, async (req, res) => {
                 quantity: 1 // Initialize quantity to 1
             });
             const savedItem = await newItem.save();
-            console.log("Item added successfully");
             res.json(savedItem); // Send back the saved item
         }
         
