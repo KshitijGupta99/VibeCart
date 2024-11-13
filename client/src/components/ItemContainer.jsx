@@ -1,7 +1,6 @@
-import React from 'react'
-import "../index.css"
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Item from './Item';
+import "../index.css";
 
 const ItemContainer = () => {
   const url = import.meta.env.VITE_BACKEND_URL;
@@ -15,12 +14,15 @@ const ItemContainer = () => {
             "auth-token": localStorage.getItem('token')
           },
         });
+        if (!response.ok) {
+          throw new Error("Failed to fetch items");
+      }
         var result = await response.json();
         setItems(result);
         console.log(result);;
     
-      } catch {
-        console.log('Error in fetching items');
+      } catch (error) {
+        console.log('Error in fetching items:', error);
         return;
       }
     };
@@ -39,7 +41,7 @@ return (
       </ul>
     </div>
     <div className='container row align-items-start' style={{ height: "auto", width: "100vw" }}>
-      {items?.map((item) => {
+      {(items)?.map((item) => {
         return <Item key={item._id} data={item} />
       })}
     </div>
@@ -49,4 +51,4 @@ return (
 )
 }
 
-export default ItemContainer
+export default ItemContainer;
