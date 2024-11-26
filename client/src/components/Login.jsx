@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-
+import { useNavigate } from "react-router-dom";
 const url  =  import.meta.env.VITE_BACKEND_URL;
 const Login = () => {
     
+    const navigate = useNavigate();
+
     //document.getElementById('root').style.backgroundImage = "url(..\\public\\bg.jpg)";
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -37,6 +39,7 @@ const Login = () => {
                 console.log(authToken)
                 localStorage.setItem('token', authToken?.token);
                 seterrorMsg("");
+                navigate('/');
             }
             else if( response.status == 401){
                 seterrorMsg("Invalid Creds");
@@ -128,7 +131,9 @@ const Login = () => {
                         <div  className='mt-2'>
                          <h6><a className='text-light-emphasis'  href=''>Forgot Your Password</a></h6>
                         
-                        <h5 className='' style={{color: '#c1b3b3'}}>New User?<a className='text-light-emphasis' href=''> Click Here</a></h5>
+                        <h5 className='' style={{color: '#c1b3b3'}}>New User?<a className='text-light-emphasis' onClick={()=>{
+                            navigate('/signup')
+                        }} href=''> Click Here</a></h5>
                         </div>
                     </form>
                 </div>

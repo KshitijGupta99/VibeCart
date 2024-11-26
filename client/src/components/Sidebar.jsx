@@ -1,6 +1,9 @@
 import React from 'react'
-
+import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  
   return (
     <div>
         <div className="offcanvas offcanvas-start " style={{ width: '17%', backgroundColor:'#F5E3D5' }} tabIndex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
@@ -34,7 +37,9 @@ const Sidebar = () => {
             </li>
           </ul>
           <div className='position-absolute bottom-0 start-2 ms-2 mb-4'>
-            <button className='btn btn-dark'>sign Out</button>
+            <button className='btn btn-dark ' onClick = {()=>{
+              navigate('/login');
+            }}>sign Out</button>
           </div>
         </div>
       </div>

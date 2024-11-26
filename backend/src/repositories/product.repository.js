@@ -6,8 +6,13 @@ class ProductRepository {
     }
     
     async getProductById(productId) {
-        console.log(productId, "from product repo");
-        return await Products.find( { _id: productId } );
+    try{
+        // console.log(productId);
+        let item =  await Products.find( { id: productId } );
+        return item;
+    }catch{
+        return null;
+    }
     }
     
     async addProduct(productData) {

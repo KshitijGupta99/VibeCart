@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
+
+    const navigate = useNavigate();
+
     const url = import.meta.env.VITE_BACKEND_URL;
     const[creds,setCreds] = useState({
         username : "",
@@ -26,6 +29,7 @@ const Signup = () => {
                 localStorage.setItem('token', authToken);
                 seterrorMsg("");
                 console.log("Signup success");
+                navigate('/')
             }
             else if( response.status == 401){
                 seterrorMsg("Invalid email");

@@ -5,6 +5,7 @@ import "../index.css";
 const ItemContainer = () => {
   const url = import.meta.env.VITE_BACKEND_URL;
   const [items, setItems] = useState([]);
+  const [category, setCategory] = useState("All");
   useEffect(() => {
     const fetching = async () => {
       try {

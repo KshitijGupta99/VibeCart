@@ -10,7 +10,8 @@ class ProductService {
     }
 
     async getProductById(productId) {
-        return await this.productRepository.getProductById(productId);
+        let item =  await this.productRepository.getProductById(productId);
+        return item;
     }
 
     async addProduct(productData) {

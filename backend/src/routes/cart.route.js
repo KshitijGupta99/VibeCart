@@ -12,7 +12,7 @@ router.post('/removeProductFromCart', cartController.removeFromCart)
 
 router.post('/updateProductQuantity', cartController.updateCartItemQuantity)
 
-router.get('/getcartdetails', cartController.getCartItems)
+router.get('/getcartdetails/:id', cartController.getCartItems)
 
 
 module.exports = router

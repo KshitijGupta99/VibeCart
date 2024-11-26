@@ -24,6 +24,7 @@ class CartController {
     removeFromCart = async (req, res) => {
         try {
             const { productId } = req.body;
+            // productId = 
             const cartItem = await this.cartServices.removeFromCart(productId);
             if (!cartItem) return res.status(404).send('Cart item not found');
             res.status(200).json(cartItem);
@@ -35,7 +36,8 @@ class CartController {
     // Get cart items
     getCartItems = async (req, res) => {
         try {
-            const cartItems = await this.cartServices.getAllCartItems("userid");
+            let id = req.params.id;
+            const cartItems = await this.cartServices.getAllCartItems(id);
             res.status(200).json(cartItems);
         } catch (error) {
             console.error(error);

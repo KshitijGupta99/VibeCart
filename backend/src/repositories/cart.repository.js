@@ -4,11 +4,11 @@ class CartRepository{
     async addtoCart(userId, newProduct) {
         // Find the cart of the user
         const cart = await Cart.findOne({ userId });
-
+        console.log(newProduct.productId);
         if (cart) {
             // Check if the product already exists in the cart
             const productIndex = cart.products.findIndex(p => p.productId === newProduct.productId);
-
+            console.log(productIndex);
             if (productIndex > -1) {
                 // If the product exists, update the quantity
                 cart.products[productIndex].quantity += newProduct.quantity;
@@ -33,7 +33,7 @@ class CartRepository{
 
     async getAllCartItems(userId){
         try {
-            const cartItems = await Cart.find({ userId });
+            const cartItems = await Cart.find({ userId: userId });
             console.log(cartItems, "cartietm  from backend");
             return cartItems;
         } catch (error) {

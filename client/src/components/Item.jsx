@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const Item = ({ data }) => {
+    // console.log(data);
     const [errorMsg, setErrorMessage] = useState("");
     const [buffer, setBuffer] = useState(false);
     const [quantity, setQuantity] = useState(1);
@@ -11,24 +12,21 @@ const Item = ({ data }) => {
         e.preventDefault();
         
         try {
-<<<<<<< HEAD
-            setbuffer(true);
-            let response = await fetch(`${url}/cart/addProductToCart`, {
-=======
+            console.log(data.id, " propduct ID");
             setBuffer(true);
-            const response = await fetch(`${url}/cart/addProductToCart/67077c963a43fcac1c5046e0/add`, {
->>>>>>> design_changes
+            const response = await fetch(`${url}/cart/addProductToCart/67370126b62a527033831a34/add`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "auth-token": localStorage.getItem('token'),
                 },
                 body: JSON.stringify({
-                    productId: data.product_id,
+                    productId: data.id,
                     quantity: quantity,
                     price: data.price,
                 }),
             });
+            
 
             if (!response.ok) {
                 throw new Error("Network response was not ok");
@@ -51,7 +49,7 @@ const Item = ({ data }) => {
                 <h5 className="card-title" style={{ overflow: "hidden", maxHeight: '7vh' }}>
                     {data?.title ? (data.title.length > 40 ? `${data.title.slice(0, 40)}...` : data.title) : null}
                 </h5>
-                <p className="card-text mb-0"><b>₹{data.price}</b></p>
+                <p className="card-text mb-0"><b>${data.price}</b></p>
                 <p className="card-text mt-0">
                     {data.rating.rate}
                     <svg style={{ marginTop: -4, marginLeft: 2 }} xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" className="bi bi-star" viewBox="0 0 16 16">
