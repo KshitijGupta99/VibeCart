@@ -7,6 +7,7 @@ import Cart from './Cart';
 const url = import.meta.env.VITE_BACKEND_URL;
 
 const Home = () => {
+  const navigate = useNavigate();
   // document.getElementById("root").style.backgroundImage("none")
   document.body.style.backgroundImage = "none";
   const [CartVisible, SetCartVisible] = useState(false);
@@ -23,6 +24,7 @@ const Home = () => {
   
   
   const userId = localStorage.getItem("userId");
+  if(!userId)  navigate('/login');
   // Retrieve the userId cookie
   
 
@@ -80,13 +82,12 @@ const Home = () => {
 
             
             <div className='btn d-flex mt-4 me-3' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => {
-              console.log("Cart button clicked"); // Log when the button is clicked
               fetchData(); // Call fetchData
               toggleCart()
             }} style={{ justifyContent: 'center', alignItems: 'center', width: '4%', height: '10%', position: 'relative' }} >
 
-              <img src='../assets/CLOUD.png' className='mt-1' width="130" height="130" style={{ position: 'absolute' }} />
-              <img src='../assets/shopping-cart.png' width="40" height="40" style={{ position: 'absolute' }} />
+              <img src='client\src\assets\cloud.png' className='mt-1' width="130" height="130" style={{ position: 'absolute' }} />
+              <img src='client\src\assets\shopping-cart.png' width="40" height="40" style={{ position: 'absolute' }} />
             </div>
 
 
