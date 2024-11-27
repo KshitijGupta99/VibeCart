@@ -63,7 +63,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: ['http://localhost:5173','https://www..vibe-cart-six.vercel.app' ],
+    origin: ['http://localhost:5173','https://www.vibe-cart-six.vercel.app' ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   }),
 );
