@@ -59,7 +59,7 @@ const Home = () => {
 
       <div className="container-fluid max-vw-100 p-0 ">
         <div className="row" style={{
-          backgroundImage: `url('../public/mall_bg.jpg')`,
+          backgroundImage: `url('../assets/mall_bg.jpg')`,
           backgroundSize: 'cover', // To cover the entire div
           backgroundPosition: 'center', // To center the image
           backgroundRepeat: 'no-repeat', // Prevent the image from repeating
@@ -70,7 +70,7 @@ const Home = () => {
 
 
             <div><button className="pt-0 btn float-end px-5" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" >
-              <i className="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"><img src="..\public\icon.png" height='60vh' alt="logo image" /></i>
+              <i className="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"><img src="..\assets\icon.png" height='60vh' alt="logo image" /></i>
             </button></div>
 
 
@@ -85,8 +85,8 @@ const Home = () => {
               toggleCart()
             }} style={{ justifyContent: 'center', alignItems: 'center', width: '4%', height: '10%', position: 'relative' }} >
 
-              <img src='../public/CLOUD.png' className='mt-1' width="130" height="130" style={{ position: 'absolute' }} />
-              <img src='../public/shopping-cart.png' width="40" height="40" style={{ position: 'absolute' }} />
+              <img src='../assets/CLOUD.png' className='mt-1' width="130" height="130" style={{ position: 'absolute' }} />
+              <img src='../assets/shopping-cart.png' width="40" height="40" style={{ position: 'absolute' }} />
             </div>
 
 

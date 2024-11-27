@@ -108,7 +108,7 @@ const Login = () => {
                                     required
                                 />
                                 <img
-                                    src=".\public\eyebrowClose.png"
+                                    src="..\assets\eyebrowClose.png"
                                     alt="show"
                                     style={{
                                         height: '2vw',
