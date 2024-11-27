@@ -38,7 +38,10 @@ class UserController {
 
       // Prepare JWT token
       let token = await this.userService.authtokenGen(savedUser);
-      res.json({ token });
+
+      const userId = savedUser.id; // Assuming userId is provided 
+      // console.log("user IDddd", userId)
+      res.json({ token, userId});
 
     } catch (error) {
       console.error(error);
@@ -56,14 +59,15 @@ class UserController {
 
       let user = await this.userService.findByUsername(username);
       if (!user) return res.status(401).json({ error: "Invalid credentials" });
-      console.log("user opassword is" , user);
+      console.log("user is" , user);
       if (!user.password) return res.status(400).json({ message: "No password found for this user" });
 
       let userValid = await this.userService.comparePassword(password, user.password);     //matching password 
       if (!userValid) return res.status(401).json({ error: "Invalid credentials" });
 
       let token = await this.userService.authtokenGen(user);
-      res.json({ token });
+      let userId = user._id;
+      res.json({ token, userId});
 
     } catch (error) {
       return res.send(error.message)

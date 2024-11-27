@@ -5,6 +5,9 @@ const multer = require('multer');
 const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
+
 
 // utils
 const { Logger, TryCatch } = require('./utils');
@@ -15,7 +18,7 @@ const {
 
 // main app
 const app = express();
-
+app.use(cookieParser());
 // middlewares
 app.use(helmet());
 app.use(

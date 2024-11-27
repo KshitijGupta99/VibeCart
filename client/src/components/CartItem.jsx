@@ -3,7 +3,6 @@ const url = import.meta.env.VITE_BACKEND_URL;
 
 const CartItem = ({ item }) => {
   const [data, setData] = useState({});
-  console.log(item, "itemsssss");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +17,6 @@ const CartItem = ({ item }) => {
         });
   
         const result = await response.json();
-        console.log(result, "result of get product by id");
         await setData(result[0]);
       } catch (error) {
         console.error("Error fetching data:", error);

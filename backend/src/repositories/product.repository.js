@@ -27,7 +27,7 @@ class ProductRepository {
     }
     
     async getProductsByCategory(category) {
-        return await Products.find({ product_id: productId });
+        return await Products.find({ category });
     }
     
     async getProductsByRating(rating) {

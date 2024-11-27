@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = ({ data }) => {
   const navigate = useNavigate();
-  console.log(data);
+  console.log(data, "cart data");
   // Debugging log
   
 
@@ -44,7 +44,10 @@ const Cart = ({ data }) => {
                 <p>No items in the cart.</p>
               )}
             </div>
-            <h5>Total: ${data[0].total.toFixed(2)}</h5>
+            {
+              data?.[0]?.products?.length > 0 ?(<h5>Total: ${data[0].total.toFixed(2)}</h5>) : <p>No item</p>
+            }
+            
             <div className="modal-footer py-2">
               <button
                 type="button"

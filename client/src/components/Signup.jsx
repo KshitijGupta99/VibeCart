@@ -25,8 +25,9 @@ const Signup = () => {
             });
 
             if(response.ok){
-                const authToken = await response.json().stringify;
-                localStorage.setItem('token', authToken);
+                const data = await response.json();
+                localStorage.setItem('token', data?.token);
+                localStorage.setItem('userId', data?.userId);
                 seterrorMsg("");
                 console.log("Signup success");
                 navigate('/')

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ItemContainer from './ItemContainer';
-
+// import { decode as jwtDecode } from "jwt-decode";
+import Cookies from 'js-cookie';
 import Sidebar from './Sidebar';
 import Cart from './Cart';
 const url = import.meta.env.VITE_BACKEND_URL;
@@ -16,12 +17,27 @@ const Home = () => {
       SetCartVisible(true);
     }
   }
+  
+  
+
+  
+  
+  const userId = localStorage.getItem("userId");
+  // Retrieve the userId cookie
+  
+
+  // const token = localStorage.getItem("auth-token");
+  // var userId = '';
+  // if (token) {
+  //   const decodedToken = jwtDecode(token);
+  //   userId = decodedToken.userId; // Replace `userId` with the key used in your token.
+  //   console.log(userId);
+  // }
 
   const [CartData, setCartData] = useState([]);
   const fetchData = async () => {
     try {
-      console.log("started")
-      const response = await fetch(`${url}/cart/getcartdetails/67370126b62a527033831a34`, {
+      const response = await fetch(`${url}/cart/getcartdetails/${userId}`, {
         method: "GET",
         headers: {
           "auth-token": localStorage.getItem('token'),
@@ -32,7 +48,6 @@ const Home = () => {
 
       const result = await response.json();
       setCartData(result);
-      console.log(result, "result updated l 25"); // Update state with fetched data
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -43,13 +58,13 @@ const Home = () => {
       <Sidebar />
 
       <div className="container-fluid max-vw-100 p-0 ">
-        <div className="row w-100" style={{
+        <div className="row" style={{
           backgroundImage: `url('../public/mall_bg.jpg')`,
           backgroundSize: 'cover', // To cover the entire div
           backgroundPosition: 'center', // To center the image
           backgroundRepeat: 'no-repeat', // Prevent the image from repeating
           height: '40vh', // Full viewport height
-          width: '100%' // Full width
+          width: '101%' // Full width
         }}>
           <div className="col pt-3  my-3 d-flex justify-content-between">
 

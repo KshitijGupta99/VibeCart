@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
+// import { decode as jwtDecode } from "jwt-decode";
+import Cookies from 'js-cookie';
 
 const Item = ({ data }) => {
     // console.log(data);
     const [errorMsg, setErrorMessage] = useState("");
     const [buffer, setBuffer] = useState(false);
     const [quantity, setQuantity] = useState(1);
+    
+    
+    const userId = localStorage.getItem("userId");
+    
+
+    // const token = localStorage.getItem("auth-token");
+    // let userId = "";
+    // if (token) {
+    //     const decodedToken = jwtDecode(token);
+    //     userId = decodedToken.userId; // Replace `userId` with the key used in your token.
+    // }
 
     const handleClick = async (e) => {
         setErrorMessage("");
@@ -14,7 +27,7 @@ const Item = ({ data }) => {
         try {
             console.log(data.id, " propduct ID");
             setBuffer(true);
-            const response = await fetch(`${url}/cart/addProductToCart/67370126b62a527033831a34/add`, {
+            const response = await fetch(`${url}/cart/addProductToCart/${userId}/add`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

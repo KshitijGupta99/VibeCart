@@ -6,7 +6,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     //document.getElementById('root').style.backgroundImage = "url(..\\public\\bg.jpg)";
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, seterrorMsg] = useState('');
 
@@ -31,13 +31,14 @@ const Login = () => {
                 headers: {
                     "Content-type" : 'application/json'
                 },
-                body: JSON.stringify({email, password})
+                body: JSON.stringify({username, password})
             });
             console.log(response)
             if(response.ok){
-                const authToken = await response.json();
-                console.log(authToken)
-                localStorage.setItem('token', authToken?.token);
+                const data = await response.json();
+                console.log(data)
+                localStorage.setItem('token', data?.token);
+                localStorage.setItem('userId', data?.userId);
                 seterrorMsg("");
                 navigate('/');
             }
@@ -64,7 +65,7 @@ const Login = () => {
                     <h3 className="text-center coatainer mb-4 mt-3">Login</h3>
                     <form onSubmit={handleSubmit} className='' style={{ height: 70 + 'vh', fontFamily: 'Verdana' }}>
                         <div className="form-group d-flex justify-content-around" style={{ marginBottom: 2 + 'vh', position: 'center' }}>
-                            <label htmlFor="email" style={{}}>Email address</label>
+                            <label htmlFor="text" style={{}}> Enter Username :</label>
                             <input
                                 style={{
                                     height: 6 + 'vh', fontSize: 21 + 'px', color: "#5d5454", fontFamily: 'Verdana', border: '1px solid #ccc',
@@ -74,11 +75,11 @@ const Login = () => {
 
                                 onFocus={(e) => e.target.style.border = '1px solid #ccc'}
                                 onBlur={(e) => e.target.style.border = '1px solid #ccc'}
-                                type="email"
+                                type="text"
                                 className="form-control"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                id="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
                         </div>

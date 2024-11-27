@@ -71,6 +71,20 @@ class ProductController {
       res.status(500).send("Server Error");
     }
   };
+
+  getProductbycategory = async (req, res) => {
+    try {
+      const products = await this.productService.getProductsByCategory(
+        req.params.category
+      );
+      res.status(200).json(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Server Error");
+    }
+  };
+
+
 }
 
 module.exports = ProductController;

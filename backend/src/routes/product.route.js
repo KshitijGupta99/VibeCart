@@ -10,5 +10,6 @@ router.get('/getProductById', productController.getProductById)
 router.post('/addProduct', productController.addProduct)
 router.get('/updateProduct', productController.updateProduct)
 router.get('/searchProduct', productController.searchProduct)
+router.get('/getAllProducts/:category', productController.getProductbycategory)
 
 module.exports = router
