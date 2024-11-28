@@ -25,7 +25,7 @@ const Home = () => {
   
   
   const userId = localStorage.getItem("userId");
-  if(!userId)  navigate('/login');
+  if(userId == null)  navigate('/login');
   // Retrieve the userId cookie
   
 
@@ -62,7 +62,7 @@ const Home = () => {
 
       <div className="container-fluid max-vw-100 p-0 ">
         <div className="row" style={{
-          backgroundImage: `url('../assets/mall_bg.jpg')`,
+          backgroundImage: `url('mall_bg.jpg')`,
           backgroundSize: 'cover', // To cover the entire div
           backgroundPosition: 'center', // To center the image
           backgroundRepeat: 'no-repeat', // Prevent the image from repeating
