@@ -38,8 +38,9 @@ const Sidebar = () => {
           </ul>
           <div className='position-absolute bottom-0 start-2 ms-2 mb-4'>
             <button className='btn btn-dark ' onClick = {()=>{
+              localStorage.clear();
               navigate('/login');
-            }}>sign Out</button>
+            }}>Log Out</button>
           </div>
         </div>
       </div>

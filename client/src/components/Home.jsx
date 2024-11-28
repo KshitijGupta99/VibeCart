@@ -23,9 +23,15 @@ const Home = () => {
   
 
   
-  
   const userId = localStorage.getItem("userId");
-  if(userId == null)  navigate('/login');
+
+  if (!userId) {
+    console.log("No userId found in localStorage. Navigating to /login...");
+    navigate("/login");
+  } else {
+    console.log("User is logged in. userId:", userId);
+  }
+
   // Retrieve the userId cookie
   
 
@@ -57,6 +63,7 @@ const Home = () => {
   };
   return (
     <>
+      {}
 
       <Sidebar />
 
