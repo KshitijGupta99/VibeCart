@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ItemContainer from './ItemContainer';
+import { useNavigate } from "react-router-dom";
 // import { decode as jwtDecode } from "jwt-decode";
 import Cookies from 'js-cookie';
 import Sidebar from './Sidebar';
@@ -72,7 +73,7 @@ const Home = () => {
 
 
             <div><button className="pt-0 btn float-end px-5" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" >
-              <i className="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"><img src="..\assets\icon.png" height='60vh' alt="logo image" /></i>
+              <i className="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"><img src="icon.png" height='60vh' alt="logo image" /></i>
             </button></div>
 
 
@@ -86,8 +87,8 @@ const Home = () => {
               toggleCart()
             }} style={{ justifyContent: 'center', alignItems: 'center', width: '4%', height: '10%', position: 'relative' }} >
 
-              <img src='client\src\assets\cloud.png' className='mt-1' width="130" height="130" style={{ position: 'absolute' }} />
-              <img src='client\src\assets\shopping-cart.png' width="40" height="40" style={{ position: 'absolute' }} />
+              <img src='cloud.png' className='mt-1' width="130" height="130" style={{ position: 'absolute' }} />
+              <img src='shopping-cart.png' width="40" height="40" style={{ position: 'absolute' }} />
             </div>
 
 
