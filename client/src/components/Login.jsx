@@ -17,10 +17,10 @@ const Login = () => {
 
         if (x.type === "password") {
             x.type = "text";
-            eye.src = ".\\eyeopen.png";
+            eye.src = "eyeopen.png";
         } else {
             x.type = "password";
-            eye.src = ".\\eyebrowClose.png";
+            eye.src = "eyebrowClose.png";
         }
     };
     const handleSubmit = async (e)=>{
@@ -58,7 +58,7 @@ const Login = () => {
     }
     return (
 
-        <div className="d-flex justify-content-center shadow p-3 mb-5" style={{ backgroundColor: "none", backgroundImage:"none", borderRadius: 3 + "vh", height: 60 + 'vh', border: 2 + 'px solid black', paddingLeft: 0 + 'px', width: 33 + "vw", textAlign: 'center' }}>
+        <div className="d-flex justify-content-center shadow p-3 mb-5" style={{ backgroundColor: "none;", backgroundImage:"none", borderRadius: 3 + "vh", height: 60 + 'vh', border: 2 + 'px solid black', paddingLeft: 0 + 'px', width: 33 + "vw", textAlign: 'center' }}>
             <div className="  h-100" style={{ height: 80 + 'vh' }}>
                 <div className="align-items-center h-100" style={{ height: 80 + 'vh', fontSize: 21 + 'px' }}>
 
@@ -108,7 +108,7 @@ const Login = () => {
                                     required
                                 />
                                 <img
-                                    src="..\assets\eyebrowClose.png"
+                                    src="eyebrowClose.png"
                                     alt="show"
                                     style={{
                                         height: '2vw',

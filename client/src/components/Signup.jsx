@@ -63,10 +63,10 @@ const Signup = () => {
 
         if (x.type === "password") {
             x.type = "text";
-            eye.src = ".\\public\\eyeopen.png";
+            eye.src = "eyeopen.png";
         } else {
             x.type = "password";
-            eye.src = ".\\public\\eyebrowClose.png";
+            eye.src = "eyebrowClose.png";
         }
     };
 
@@ -141,7 +141,7 @@ const Signup = () => {
                                     required
                                 />
                                 <img
-                                    src=".\public\eyebrowClose.png"
+                                    src="eyebrowClose.png"
                                     alt="show"
                                     style={{
                                         height: '2vw',

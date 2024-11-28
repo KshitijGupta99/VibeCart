@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ItemContainer from './ItemContainer';
 import { useNavigate } from "react-router-dom";
 // import { decode as jwtDecode } from "jwt-decode";
@@ -21,16 +21,17 @@ const Home = () => {
   }
   
   
+  useEffect(()=>{
+    const userId = localStorage.getItem("userId");
 
+    if (!userId) {
+      console.log("No userId found in localStorage. Navigating to /login...");
+      navigate("/login");
+    } else {
+      console.log("User is logged in. userId:", userId);
+    }
+  }, [])
   
-  const userId = localStorage.getItem("userId");
-
-  if (!userId) {
-    console.log("No userId found in localStorage. Navigating to /login...");
-    navigate("/login");
-  } else {
-    console.log("User is logged in. userId:", userId);
-  }
 
   // Retrieve the userId cookie
   
