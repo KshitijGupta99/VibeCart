@@ -47,6 +47,7 @@ const Home = () => {
   const [CartData, setCartData] = useState([]);
   const fetchData = async () => {
     try {
+      let userId = localStorage.getItem("userId");
       const response = await fetch(`${url}/cart/getcartdetails/${userId}`, {
         method: "GET",
         headers: {
