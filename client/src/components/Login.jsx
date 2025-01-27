@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 const url  =  import.meta.env.VITE_BACKEND_URL;
 const Login = () => {
-    
+    console.log(url)
     const navigate = useNavigate();
 
     //document.getElementById('root').style.backgroundImage = "url(..\\public\\bg.jpg)";
@@ -58,88 +58,125 @@ const Login = () => {
     }
     return (
 
-        <div className="d-flex justify-content-center shadow p-3 mb-5" style={{ backgroundColor: "none;", backgroundImage:"none", borderRadius: 3 + "vh", height: 60 + 'vh', border: 2 + 'px solid black', paddingLeft: 0 + 'px', width: 33 + "vw", textAlign: 'center' }}>
-            <div className="  h-100" style={{ height: 80 + 'vh' }}>
-                <div className="align-items-center h-100" style={{ height: 80 + 'vh', fontSize: 21 + 'px' }}>
+        <div
+  className="d-flex justify-content-center align-items-center shadow"
+  style={{
+    marginTop: '2vh',
+    backgroundColor: "#f8f9fa",
+    borderRadius: "3vh",
+    maxHeight: "60vh",
+    border: "2px solid #ddd",
+    textAlign: "center",
+    padding: "2rem",
+  }}
+>
+  <div className="w-100">
+    <h3 className="text-center mb-4" style={{ color: "#343a40", fontFamily: "Verdana" }}>
+      Login
+    </h3>
+    <form onSubmit={handleSubmit} style={{ fontFamily: "Verdana" }}>
+      {/* Username Field */}
+      <div className="form-group mb-4">
+        <label htmlFor="username" className="d-block text-start mb-2" style={{ fontSize: "1.1em", color: "#495057" }}>
+          Enter Username
+        </label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          className="form-control"
+          style={{
+            height: "50px",
+            fontSize: "1rem",
+            border: "1px solid #ced4da",
+            borderRadius: "0.5rem",
+            padding: "0.5rem",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            outline: "none",
+          }}
+        />
+      </div>
 
-                    <h3 className="text-center coatainer mb-4 mt-3">Login</h3>
-                    <form onSubmit={handleSubmit} className='' style={{ height: 70 + 'vh', fontFamily: 'Verdana' }}>
-                        <div className="form-group d-flex justify-content-around" style={{ marginBottom: 2 + 'vh', position: 'center' }}>
-                            <label htmlFor="text" style={{}}> Enter Username :</label>
-                            <input
-                                style={{
-                                    height: 6 + 'vh', fontSize: 21 + 'px', color: "#5d5454", fontFamily: 'Verdana', border: '1px solid #ccc',
-                                    outline: 'none',
-                                    boxShadow: 'none'
-                                }}
-
-                                onFocus={(e) => e.target.style.border = '1px solid #ccc'}
-                                onBlur={(e) => e.target.style.border = '1px solid #ccc'}
-                                type="text"
-                                className="form-control"
-                                id="username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="form-group d-flex justify-content-around" style={{ marginBottom: 2 + 'vh', position: 'center' }}>
-
-                            <label htmlFor="password me-2" style={{}}>Password </label>
-                            <div style={{ position: 'relative', width: '100%' }}>
-                                <input
-                                    style={{
-                                        marginLeft: '1vh',
-                                        height: '6vh',
-                                        width: '98%',
-                                        fontSize: '21px',
-                                        border: '1px solid #ccc',
-                                        paddingRight: '40px', // Provide space for the image
-                                        outline: 'none',
-                                        boxShadow: 'none'
-                                    }}
-                                    onFocus={(e) => e.target.style.border = '1px solid #ccc'}
-                                    onBlur={(e) => e.target.style.border = '1px solid #ccc'}
-                                    type="password"
-                                    className="form-control"
-                                    id="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                                <img
-                                    src="eyebrowClose.png"
-                                    alt="show"
-                                    style={{
-                                        height: '2vw',
-                                        width: '2vw',
-                                        position: 'absolute',
-                                        top: '50%',
-                                        right: '10px',
-                                        transform: 'translateY(-50%)',
-                                        cursor: 'pointer',
-                                    }}
-                                    onClick={togglePass}
-                                />
-                            </div>
-                        </div>
-
-                       
-
-                        <button type="submit" className="mt-5 btn btn-primary btn-block">
-                            Login
-                        </button>
-                        <div  className='mt-2'>
-                         <h6><a className='text-light-emphasis'  href=''>Forgot Your Password</a></h6>
-                        
-                        <h5 className='' style={{color: '#c1b3b3'}}>New User?<a className='text-light-emphasis' onClick={()=>{
-                            navigate('/signup')
-                        }} href=''> Click Here</a></h5>
-                        </div>
-                    </form>
-                </div>
-            </div>
+      {/* Password Field */}
+      <div className="form-group mb-4">
+        <label htmlFor="password" className="d-block text-start mb-2" style={{ fontSize: "1.1em", color: "#495057" }}>
+          Password
+        </label>
+        <div style={{ position: "relative" }}>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="form-control"
+            style={{
+              height: "50px",
+              fontSize: "1rem",
+              border: "1px solid #ced4da",
+              borderRadius: "0.5rem",
+              padding: "0.5rem",
+              paddingRight: "3rem",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+              outline: "none",
+            }}
+          />
+          <img
+            src="eyebrowClose.png"
+            alt="Toggle Password"
+            style={{
+              position: "absolute",
+              top: "50%",
+              right: "1rem",
+              transform: "translateY(-50%)",
+              height: "24px",
+              cursor: "pointer",
+            }}
+            onClick={togglePass}
+          />
         </div>
+      </div>
+
+      {/* Buttons */}
+      <button
+        type="submit"
+        className="btn btn-primary btn-block w-100 mt-3"
+        style={{
+          height: "50px",
+          fontSize: "1rem",
+          borderRadius: "0.5rem",
+          backgroundColor: "#007bff",
+          borderColor: "#007bff",
+          transition: "all 0.3s ease",
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "#007bff")}
+      >
+        Login
+      </button>
+
+      {/* Links */}
+      <div className="mt-4">
+        <a href="#" className="text-decoration-none d-block mb-2" style={{ color: "#6c757d", fontSize: "0.9rem" }}>
+          Forgot Your Password?
+        </a>
+        <span style={{ color: "#6c757d", fontSize: "0.9rem" }}>
+          New User?{" "}
+          <a
+            href="#"
+            onClick={() => navigate("/signup")}
+            className="text-decoration-none"
+            style={{ color: "#007bff" }}
+          >
+            Click Here
+          </a>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
 
     )
 }

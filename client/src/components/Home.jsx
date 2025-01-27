@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import ItemContainer from './ItemContainer';
+import React, { useState, useEffect } from "react";
+import ItemContainer from "./ItemContainer";
 import { useNavigate } from "react-router-dom";
 // import { decode as jwtDecode } from "jwt-decode";
-import Cookies from 'js-cookie';
-import Sidebar from './Sidebar';
-import Cart from './Cart';
+import Cookies from "js-cookie";
+import Sidebar from "./Sidebar";
+import Cart from "./Cart";
 const url = import.meta.env.VITE_BACKEND_URL;
+import sample from "../assets/bgVid.mp4";
 
 const Home = () => {
   const navigate = useNavigate();
+
+  //   <video autoplay muted loop id="myVideo">
+  //   <source src="rain.mp4" type="video/mp4">
+  // </video>
   // document.getElementById("root").style.backgroundImage("none")
   document.body.style.backgroundImage = "none";
   const [CartVisible, SetCartVisible] = useState(false);
@@ -19,9 +24,8 @@ const Home = () => {
       SetCartVisible(true);
     }
   }
-  
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const userId = localStorage.getItem("userId");
 
     if (!userId) {
@@ -30,11 +34,9 @@ const Home = () => {
     } else {
       console.log("User is logged in. userId:", userId);
     }
-  }, [])
-  
+  }, []);
 
   // Retrieve the userId cookie
-  
 
   // const token = localStorage.getItem("auth-token");
   // var userId = '';
@@ -51,10 +53,9 @@ const Home = () => {
       const response = await fetch(`${url}/cart/getcartdetails/${userId}`, {
         method: "GET",
         headers: {
-          "auth-token": localStorage.getItem('token'),
-          "content-type": "application/json"
+          "auth-token": localStorage.getItem("token"),
+          "content-type": "application/json",
         },
-
       });
 
       const result = await response.json();
@@ -68,39 +69,84 @@ const Home = () => {
       {}
 
       <Sidebar />
+      <div
+        className="container-fluid max-vw-100 p-0 bg-opacity-0 "
+        style={{ backgroundColor: "none" }}
+      >
+        <div style={{ background: "none" ,zIndex: "1"}} className="col pt-3  my-3 d-flex justify-content-between">
+          <video
+            className="videoTag"
+            autoPlay
+            loop
+            muted
+            style={{
+              position: "fixed",
+              zIndex: "0",
+              width: "100vw",
+              height: "100vh", // Add this to cover the full viewport
+              top: 0, // Ensure it starts from the top of the viewport
+              left: 0, // Ensure it starts from the left of the viewport
+            }}
+          >
+            <source src={sample} type="video/mp4" />
+          </video>
 
-      <div className="container-fluid max-vw-100 p-0 ">
-        <div className="row" style={{
-          backgroundImage: `url('mall_bg.jpg')`,
-          backgroundSize: 'cover', // To cover the entire div
-          backgroundPosition: 'center', // To center the image
-          backgroundRepeat: 'no-repeat', // Prevent the image from repeating
-          height: '40vh', // Full viewport height
-          width: '101%' // Full width
-        }}>
-          <div className="col pt-3  my-3 d-flex justify-content-between">
+          <div style={{ backgroundColor: "none" }}>
+            <button
+              className="pt-0 btn float-end px-5"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvas"
+              role="button"
+            >
+              <i
+                className="bi bi-arrow-right-square-fill fs-3"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas"
+              >
+                <img src="icon.png" height="60vh" alt="logo image" />
+              </i>
+            </button>
+          </div>
 
+          <div className="" style={{ backgroundColor: "none" }}>
+            <input
+              className="rounded-pill"
+              style={{ width: "28vw", height: "4vh", opacity: "80%" }}
+              placeholder="   Search your item..."
+              type="text"
+            />
+          </div>
 
-            <div><button className="pt-0 btn float-end px-5" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" >
-              <i className="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"><img src="icon.png" height='60vh' alt="logo image" /></i>
-            </button></div>
-
-
-            <div className=''  >
-              <input className='rounded-pill' style={{ width: '28vw', height: '4vh', opacity: '80%' }} placeholder='   Search your item...' type="text" />
-            </div>
-
-            
-            <div className='btn d-flex mt-4 me-3' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => {
+          <div
+            className="btn d-flex mt-4 me-3"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            onClick={() => {
               fetchData(); // Call fetchData
-              toggleCart()
-            }} style={{ justifyContent: 'center', alignItems: 'center', width: '4%', height: '10%', position: 'relative' }} >
-
-              <img src='cloud.png' className='mt-1' width="130" height="130" style={{ position: 'absolute' }} />
-              <img src='shopping-cart.png' width="40" height="40" style={{ position: 'absolute' }} />
-            </div>
-
-
+              toggleCart();
+            }}
+            style={{
+              zIndex:"0",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "4%",
+              height: "10%",
+              position: "relative",
+            }}
+          >
+            <img
+              src="cloud.png"
+              className="mt-1"
+              width="130"
+              height="130"
+              style={{ position: "absolute" }}
+            />
+            <img
+              src="shopping-cart.png"
+              width="40"
+              height="40"
+              style={{ position: "absolute" }}
+            />
           </div>
         </div>
         <ItemContainer />
@@ -108,7 +154,7 @@ const Home = () => {
 
       <Cart data={CartData} />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

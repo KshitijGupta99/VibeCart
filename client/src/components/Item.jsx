@@ -56,7 +56,7 @@ const Item = ({ data }) => {
     };
 
     return (
-        <div className="card my-3 px-4 pb-1 pt-3" style={{ width: "18rem", height: "20rem", marginLeft: '1em', marginRight: '1em' }}>
+        <div className="card my-3 px-4 pb-1 pt-3 " style={{ width: "18rem", height: "20rem", marginLeft: '2em', marginRight: '2em' }}>
             <img src={data.image} alt={data.description} style={{ width: "100%", height: "125px", objectFit: "contain" }} className="card-img-top" />
             <div className="card-body text-start">
                 <h5 className="card-title" style={{ overflow: "hidden", maxHeight: '7vh' }}>
