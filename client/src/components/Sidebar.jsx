@@ -6,7 +6,7 @@ const Sidebar = () => {
   
   return (
     <div>
-        <div className="offcanvas offcanvas-start " style={{ width: '17%', backgroundColor:'#F5E3D5' }} tabIndex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
+        <div className="offcanvas offcanvas-start " style={{ width: '17%', backgroundColor:'#F5E3D5', zIndex: '2'}} tabIndex="-1"  id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
         <div className="offcanvas-header">
           <h6 className="offcanvas-title d-none d-sm-block" id="offcanvas">Menu</h6>
           <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

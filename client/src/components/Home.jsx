@@ -73,7 +73,7 @@ const Home = () => {
         className="container-fluid max-vw-100 p-0 bg-opacity-0 "
         style={{ backgroundColor: "none" }}
       >
-        <div style={{ background: "none" ,zIndex: "1"}} className="col pt-3  my-3 d-flex justify-content-between">
+        <div style={{ background: "none" ,zIndex: "0"}} className="col pt-3  my-3 d-flex justify-content-between">
           <video
             className="videoTag"
             autoPlay
@@ -97,6 +97,7 @@ const Home = () => {
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvas"
               role="button"
+              style={{zIndex: 1}}
             >
               <i
                 className="bi bi-arrow-right-square-fill fs-3"
