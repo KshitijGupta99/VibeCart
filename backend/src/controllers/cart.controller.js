@@ -48,8 +48,9 @@ class CartController {
     // Update cart item quantity
     updateCartItemQuantity = async (req, res) => {
         try{
+            const userId = req.params.userId;
             const { productId, quantity } = req.body;
-            const cartItem = await this.cartServices.updateCart(productId, quantity);
+            const cartItem = await this.cartServices.updateCart(userId, productId, quantity);
             if (!cartItem) return res.status(404).send('Cart item not found');
             res.status(200).json(cartItem);
         }catch(error){

@@ -10,7 +10,7 @@ router.post('/addProductToCart/:userId/add', cartController.addToCart)
 
 router.post('/removeProductFromCart', cartController.removeFromCart)
 
-router.post('/updateProductQuantity', cartController.updateCartItemQuantity)
+router.post('/updateProductQuantity/:userId', cartController.updateCartItemQuantity)
 
 router.get('/getcartdetails/:id', cartController.getCartItems)
 

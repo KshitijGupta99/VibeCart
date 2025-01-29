@@ -4,6 +4,9 @@ const url = import.meta.env.VITE_BACKEND_URL;
 const CartItem = ({ item }) => {
   const [data, setData] = useState({});
   const [errorMsg, setErrorMessage] = useState("");
+  const [isZero, setisZero] =  useState(false)
+      
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,19 +24,19 @@ const CartItem = ({ item }) => {
         
         let x= result[0];
         x.quantity = item.quantity;
+        console.log(x, "x")
         await setData(x);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-
-  
     fetchData();
   }, [item.productId]);
 
+  
   const handleClick = async (e) => {
-    console.log(data, data.qyantity, "hereee")
+    console.log(data, data.quantity, "hereee")
     setErrorMessage("");
     const url = import.meta.env.VITE_BACKEND_URL;
     e.preventDefault();
@@ -41,7 +44,7 @@ const CartItem = ({ item }) => {
     try {
         console.log(data.id, " propduct ID");
         
-        const response = await fetch(`${url}/cart/updateProductQuantity`, {
+        const response = await fetch(`${url}/cart/updateProductQuantity/${userId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -60,6 +63,7 @@ const CartItem = ({ item }) => {
         }
 
         const result = await response.json();
+        setData(result);
         console.log("Cart quantity updated:", data.quantity); 
     } catch (error) {
         console.error("Error:", error);
@@ -67,21 +71,31 @@ const CartItem = ({ item }) => {
     }
   };
 
-  const add = ()=>{
-    data.quantity++;
+  const add = async(e)=>{
+    if(data.quantity == 0) setisZero(false);
+    await setData(prevData => ({
+      ...prevData,
+      quantity: prevData.quantity + 1
+    }));
     console.log(data.quantity, "sankhya ")
-    handleClick();
+    handleClick(e);
   }
-  const reduce = ()=>{
-    data.quantity--;
-    handleClick;
+
+  const reduce = async(e)=>{
+    setData(prevData => ({
+      ...prevData,
+      quantity: prevData.quantity - 1
+    }));
+    if(data.quantity == 1) setisZero(true);
+
+    handleClick(e);
   }
   
   useEffect(() => {
     if (Object.keys(data).length > 0) {
-      console.log(data, "inside item after data update");
+      // console.log(data, "inside item after data update");
     }
-  }, [data]);
+  }, [item?.productId]);
   
 
   return (
@@ -93,7 +107,7 @@ const CartItem = ({ item }) => {
             <h6 className="card-subtitle mb-2 text-body-secondary">{data?.title? (data.title.length > 20 ? `${data.title.slice(0, 20)}...` : data.title) : "No Title Available"}</h6>
             <p className="card-text">{data?.description? (data.title.length > 40 ? `${data.title.slice(0, 40)}...` : data.title) : "No Description Available"}</p>
             <a href="#" className="card-link">{data?.price ? `Price: $${data.price}` : "No Price Available"}</a>
-            <h6 className="card-title"><button href="#" type="button" onClick={reduce} className="btn">-</button>Quantity : {data.quantity || "N/A"} <button onClick={add} href="#" type="button" className="btn">+</button> </h6>
+            <h6 className="card-title"><button href="#" disabled = {isZero} type="button" onClick={reduce} className="btn">-</button>Quantity : {data.quantity} <button onClick={add} href="#" type="button" className="btn">+</button> </h6>
           </div>
           
           <div>

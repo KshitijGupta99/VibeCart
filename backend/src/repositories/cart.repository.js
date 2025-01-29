@@ -40,8 +40,9 @@ class CartRepository{
     
     }
     
-    async updateCartItem(productId, quantity){
-        return await Cart.updateOne({id: productid}, {quantity: quantity})
+    async updateCart(userId, productId, quantity){
+        const cart = await Cart.findOne({ userId });
+        return await cart.updateOne({id: productId}, {quantity: quantity})
     }
     
     async deleteCartItem(cartId){

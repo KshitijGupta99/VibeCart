@@ -16,8 +16,8 @@ class CartServices{
     }
     
     //to update
-    async updateCart(productId, quantity){
-        return await this.cartRepository.updateCart(productId, quantity)
+    async updateCart(userId, productId, quantity){
+        return await this.cartRepository.updateCart(userId, productId, quantity)
     }
     
     //to get all
