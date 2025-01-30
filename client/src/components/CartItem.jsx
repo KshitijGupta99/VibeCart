@@ -24,7 +24,6 @@ const CartItem = ({ item }) => {
         
         let x= result[0];
         x.quantity = item.quantity;
-        console.log(x, "x")
         await setData(x);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -32,10 +31,10 @@ const CartItem = ({ item }) => {
     };
 
     fetchData();
-  }, [item.productId]);
+  }, []);
 
   
-  const handleClick = async (e) => {
+  const handleClick = async (e, updation) => {
     console.log(data, data.quantity, "hereee")
     setErrorMessage("");
     const url = import.meta.env.VITE_BACKEND_URL;
@@ -52,18 +51,18 @@ const CartItem = ({ item }) => {
             },
             body: JSON.stringify({
                 productId: data.id,
-                quantity: data.quantity,
+                quantity: data.quantity + updation,
                 price: data.price,
             }),
         });
-        
+      
 
         if (!response.ok) {
             throw new Error("Network response was not ok");
         }
 
         const result = await response.json();
-        setData(result);
+        console.log(result);
         console.log("Cart quantity updated:", data.quantity); 
     } catch (error) {
         console.error("Error:", error);
@@ -78,7 +77,7 @@ const CartItem = ({ item }) => {
       quantity: prevData.quantity + 1
     }));
     console.log(data.quantity, "sankhya ")
-    handleClick(e);
+    handleClick(e, 1);
   }
 
   const reduce = async(e)=>{
@@ -88,7 +87,7 @@ const CartItem = ({ item }) => {
     }));
     if(data.quantity == 1) setisZero(true);
 
-    handleClick(e);
+    handleClick(e, -1);
   }
   
   useEffect(() => {

@@ -41,8 +41,22 @@ class CartRepository{
     }
     
     async updateCart(userId, productId, quantity){
-        const cart = await Cart.findOne({ userId });
-        return await cart.updateOne({id: productId}, {quantity: quantity})
+        
+        var cart = await Cart.findOne({ userId });
+
+        const productIndex = cart.products.findIndex(p => p.productId === productId);
+
+        if (productIndex === -1) {
+            throw new Error("Product not found in cart!");
+        }
+
+        // Update the quantity of the product
+        cart.products[productIndex].quantity = quantity;
+
+        // Save the cart
+        await cart.save();
+
+        return cart;
     }
     
     async deleteCartItem(cartId){
