@@ -23,7 +23,6 @@ const ItemContainer = () => {
       }
         var result = await response.json();
         setItems(result);
-        console.log(result);;
     
       } catch (error) {
         console.log('Error in fetching items:', error);

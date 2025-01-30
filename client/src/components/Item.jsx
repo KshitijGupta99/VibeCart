@@ -25,7 +25,6 @@ const Item = ({ data }) => {
         e.preventDefault();
         
         try {
-            console.log(data.id, " propduct ID");
             setBuffer(true);
             const response = await fetch(`${url}/cart/addProductToCart/${userId}/add`, {
                 method: "POST",

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = ({ data }) => {
   const navigate = useNavigate();
-  console.log(data, "cart data");
   // Debugging log
   
 

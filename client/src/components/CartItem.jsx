@@ -35,13 +35,11 @@ const CartItem = ({ item }) => {
 
   
   const handleClick = async (e, updation) => {
-    console.log(data, data.quantity, "hereee")
     setErrorMessage("");
     const url = import.meta.env.VITE_BACKEND_URL;
     e.preventDefault();
     
     try {
-        console.log(data.id, " propduct ID");
         
         const response = await fetch(`${url}/cart/updateProductQuantity/${userId}`, {
             method: "POST",
@@ -62,8 +60,6 @@ const CartItem = ({ item }) => {
         }
 
         const result = await response.json();
-        console.log(result);
-        console.log("Cart quantity updated:", data.quantity); 
     } catch (error) {
         console.error("Error:", error);
         setErrorMessage("An error occurred. Please try again.");
@@ -76,7 +72,6 @@ const CartItem = ({ item }) => {
       ...prevData,
       quantity: prevData.quantity + 1
     }));
-    console.log(data.quantity, "sankhya ")
     handleClick(e, 1);
   }
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 const url  =  import.meta.env.VITE_BACKEND_URL;
 const Login = () => {
-    console.log(url)
     const navigate = useNavigate();
 
     //document.getElementById('root').style.backgroundImage = "url(..\\public\\bg.jpg)";
@@ -33,10 +32,8 @@ const Login = () => {
                 },
                 body: JSON.stringify({username, password})
             });
-            console.log(response)
             if(response.ok){
                 const data = await response.json();
-                console.log(data)
                 localStorage.setItem('token', data?.token);
                 localStorage.setItem('userId', data?.userId);
                 seterrorMsg("");
@@ -50,7 +47,7 @@ const Login = () => {
             }
             else{
                 seterrorMsg("server Error")
-                console.log("antarik error");
+                console.log("INTERNAL SERVER ERROR error");
             }
         }catch(err){
             console.log("error", err);
