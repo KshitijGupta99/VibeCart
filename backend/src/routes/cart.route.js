@@ -1,18 +1,18 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const {CartController} = require('../controllers')
+const { CartController } = require("../controllers");
 
 const cartController = new CartController();
 
+router.post("/addProductToCart/:userId/add", cartController.addToCart);
 
-router.post('/addProductToCart/:userId/add', cartController.addToCart)
+// NEW: get cart for a user (client expects array shape)
+router.get("/getCart/:userId", cartController.getCart);
 
-router.post('/removeProductFromCart', cartController.removeFromCart)
+// ALIAS: keep old frontend-compatible endpoint so existing client calls succeed
+router.get("/getcartdetails/:userId", cartController.getCart);
 
-router.post('/updateProductQuantity/:userId', cartController.updateCartItemQuantity)
+router.post("/removeProductFromCart", cartController.removeFromCart);
 
-router.get('/getcartdetails/:id', cartController.getCartItems)
-
-
-module.exports = router
+module.exports = router;

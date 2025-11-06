@@ -1,30 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from "react";
 import './App.css'
-import Login from './components/Login'
-import Signup from './components/Signup'
-
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import Home from './components/Home'
-import Checkout from './components/Checkout'
+import "./index.css";
+import Sidebar from "./components/Sidebar";
+import Home from "./components/Home";
 
 function App() {
-
   return (
-    <>
-    <Router>
-      <Routes>
-        <Route path = "/login" element = {<Login/>} />
-        <Route path = "/signup" element = {<Signup/>} />
-        <Route path = "/" element = {<Home/>} />
-        <Route path = "/checkout" element = {<Checkout />}/>
-     
-      
-      </Routes>
-      </Router>
-    </>
-  )
+    <div className="app-shell">
+      <aside className="vb-sidebar">
+        <div className="vb-header">
+          <div className="vb-logo">VC</div>
+          <div>
+            <div className="vb-title">VibeCart</div>
+            <div className="vb-sub">Shop the vibe</div>
+          </div>
+        </div>
+
+        <Sidebar />
+      </aside>
+
+      <main className="vb-main">
+        {/* Render the Home view directly (no children) */}
+        <Home />
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;

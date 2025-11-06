@@ -1,62 +1,48 @@
-const { CartService } = require("../services")
-
+const { CartService } = require("../services");
 
 class CartController {
-    constructor(req, res) {
-        this.cartServices = new CartService()
-    }
-    
-    // Add item to cart
-    addToCart = async (req, res) => {
-        const userId = req.params.userId;  // Assuming you pass userId in the URL like /cart/:userId/add
-        const productData = req.body;
+  constructor() {
+    this.cartService = new CartService();
+  }
 
-        try {
-            const updatedCart = await this.cartServices.addtoCart(userId, productData);
-            res.status(200).json(updatedCart);
-        } catch (error) {
-            console.error("Error adding to cart:", error);
-            res.status(500).json({ error: "Server Error" });
-        }
+  // Add item to cart
+  addToCart = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const productData = req.body;
+      const result = await this.cartService.addtoCart(userId, productData);
+      return res.status(200).json(result);
+    } catch (error) {
+      console.error("Error in addToCart:", error);
+      return res.status(500).json({ error: error.message || "Internal error" });
     }
+  };
 
-    // Remove item from cart
-    removeFromCart = async (req, res) => {
-        try {
-            const { productId } = req.body;
-            // productId = 
-            const cartItem = await this.cartServices.removeFromCart(productId);
-            if (!cartItem) return res.status(404).send('Cart item not found');
-            res.status(200).json(cartItem);
-        } catch (error) {
-            console.error(error);
-        }
+  // Get cart for a user (returns an array with cart as the first element to keep client compatibility)
+  getCart = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const cart = await this.cartService.getCartByUserId(userId);
+      // client expects data[0].products — keep that shape
+      if (!cart) return res.status(200).json([]);
+      return res.status(200).json([cart]);
+    } catch (error) {
+      console.error("Error in getCart:", error);
+      return res.status(500).json({ error: error.message || "Internal error" });
     }
-    
-    // Get cart items
-    getCartItems = async (req, res) => {
-        try {
-            let id = req.params.id;
-            const cartItems = await this.cartServices.getAllCartItems(id);
-            res.status(200).json(cartItems);
-        } catch (error) {
-            console.error(error);
-        }
-    
+  };
+
+  // Remove item from cart
+  removeFromCart = async (req, res) => {
+    try {
+      const { cartId } = req.body;
+      await this.cartService.removeFromCart(cartId);
+      return res.status(200).json({ success: true });
+    } catch (error) {
+      console.error("Error in removeFromCart:", error);
+      return res.status(500).json({ error: error.message || "Internal error" });
     }
-    
-    // Update cart item quantity
-    updateCartItemQuantity = async (req, res) => {
-        try{
-            const userId = req.params.userId;
-            const { productId, quantity } = req.body;
-            const cartItem = await this.cartServices.updateCart(userId, productId, quantity);
-            if (!cartItem) return res.status(404).send('Cart item not found');
-            res.status(200).json(cartItem);
-        }catch(error){
-            console.error(error);
-        }
-    }
+  };
 }
 
 module.exports = CartController;

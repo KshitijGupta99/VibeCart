@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import ItemContainer from "./ItemContainer";
 import { useNavigate } from "react-router-dom";
 // import { decode as jwtDecode } from "jwt-decode";
-import Cookies from "js-cookie";
 import Sidebar from "./Sidebar";
 import Cart from "./Cart";
 const url = import.meta.env.VITE_BACKEND_URL;
@@ -108,14 +107,6 @@ const Home = () => {
             </button>
           </div>
 
-          <div className="" style={{ backgroundColor: "none" }}>
-            <input
-              className="rounded-pill"
-              style={{ width: "28vw", height: "4vh", opacity: "80%" }}
-              placeholder="   Search your item..."
-              type="text"
-            />
-          </div>
 
           <div
             className="btn d-flex mt-4 me-3"
