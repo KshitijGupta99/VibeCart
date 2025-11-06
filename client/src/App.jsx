@@ -3,8 +3,13 @@ import './App.css'
 import "./index.css";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
+  const isSignedIn = Boolean(localStorage.getItem("token") || localStorage.getItem("userId"));
+
   return (
     <div className="app-shell">
       <aside className="vb-sidebar">
@@ -20,8 +25,22 @@ function App() {
       </aside>
 
       <main className="vb-main">
-        {/* Render the Home view directly (no children) */}
-        <Home />
+        <Routes>
+          <Route
+            path="/"
+            element={isSignedIn ? <Home /> : <Navigate to="/login" replace />}
+          />
+          <Route
+            path="/login"
+            element={isSignedIn ? <Navigate to="/" replace /> : <Login />}
+          />
+          <Route
+            path="/signup"
+            element={isSignedIn ? <Navigate to="/" replace /> : <Signup />}
+          />
+          {/* fallback */}
+          <Route path="*" element={<Navigate to={isSignedIn ? "/" : "/login"} replace />} />
+        </Routes>
       </main>
     </div>
   );

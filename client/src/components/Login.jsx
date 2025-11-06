@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 const url  =  import.meta.env.VITE_BACKEND_URL;
 const Login = () => {
@@ -9,7 +9,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errorMsg, seterrorMsg] = useState('');
 
-    
     const togglePass = (e) => {
         const eye = e.target;
         const x = document.getElementById("password");
@@ -41,9 +40,7 @@ const Login = () => {
             }
             else if( response.status == 401){
                 seterrorMsg("Invalid Creds");
-                
                 console.log("login error galat creds");
-                
             }
             else{
                 seterrorMsg("server Error")
@@ -156,16 +153,14 @@ const Login = () => {
 
       {/* Links */}
       <div className="mt-4">
-        <a href="#" className="text-decoration-none d-block mb-2" style={{ color: "#6c757d", fontSize: "0.9rem" }}>
-          Forgot Your Password?
-        </a>
+        
         <span style={{ color: "#6c757d", fontSize: "0.9rem" }}>
           New User?{" "}
           <a
             href="#"
-            onClick={() => navigate("/signup")}
+            onClick={(e) => { e.preventDefault(); navigate("/signup"); }}
             className="text-decoration-none"
-            style={{ color: "#007bff" }}
+            style={{ color: "#007bff", cursor: "pointer" }}
           >
             Click Here
           </a>

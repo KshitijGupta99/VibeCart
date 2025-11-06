@@ -156,6 +156,17 @@ const Signup = () => {
                                 />
                             </div>
                         </div>
+                        <span style={{ color: "#6c757d", fontSize: "0.9rem" }}>
+                            Old User?{" "}
+                            <a
+                                href="#"
+                                onClick={(e) => { e.preventDefault(); navigate("/login"); }}
+                                className="text-decoration-none"
+                                style={{ color: "#007bff", cursor: "pointer" }}
+                            >
+                                Click Here
+                            </a>
+                            </span>
 
                         <button type="submit" className="mt-5 btn btn-primary btn-block">
                             SignUp
