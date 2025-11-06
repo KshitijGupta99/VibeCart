@@ -24,26 +24,15 @@ const Signup = () => {
                 body: JSON.stringify({username: creds.username, email :creds.email, password: creds.password})
             });
 
-            if(response.ok){
-                const data = await response.json();
-                localStorage.setItem('token', data?.token);
-                localStorage.setItem('userId', data?.userId);
-                seterrorMsg("");
-                console.log("Signup success");
-                navigate('/')
-            }
-            else if( response.status == 401){
-                seterrorMsg("Invalid email");
-                console.log("user Exsist");
-                alert("User Already Exsist with this Email");
-            }else if( response.status == 403){
-                seterrorMsg("Invalid username");
-                console.log("user Exsist");
-                alert("User Already Exsist with this Username");
-            }
-            else{
-                seterrorMsg("server Error")
-                console.log("antarik error");
+            const payload = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem("token", payload?.token || "");
+                localStorage.setItem("userId", payload?.userId || "");
+                navigate("/");
+                setTimeout(() => window.location.reload(), 120);
+            } else {
+                setErrorMsg(payload?.message || payload?.error || "Signup failed");
             }
 
         }catch(err){
